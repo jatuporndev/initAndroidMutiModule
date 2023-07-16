@@ -1,0 +1,34 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+}
+
+apply from: "$project.rootDir/config.gradle"
+apply from: "$project.rootDir/apply_common.gradle"
+apply from: "$project.rootDir/core_dependencies.gradle"
+
+android {
+    defaultConfig {
+        applicationId config.applicationId
+        versionCode 1
+        versionName "1.0.0"
+        resConfigs("en", "th", "mdpi")
+
+        proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+    }
+
+    buildTypes {
+        debug {
+            shrinkResources false
+            minifyEnabled false
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation project(':core')
+}
